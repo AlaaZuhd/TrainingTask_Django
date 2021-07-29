@@ -1,6 +1,6 @@
 from django import forms
 from .models import Cart, Product
-
+from django.contrib.auth.forms import UserModel
 # iterable
 GEEKS_CHOICES = (
     ("1", "One"),
@@ -10,6 +10,7 @@ GEEKS_CHOICES = (
     ("5", "Five"),
 )
 
+# class LoginForm(UserModel)
 
 class AddToCartForm(forms.ModelForm):
 
