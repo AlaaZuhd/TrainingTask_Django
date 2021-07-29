@@ -31,11 +31,11 @@ class Product(models.Model):
     price = models.FloatField(validators=[MinValueValidator(0.0)])
     description = models.TextField(blank= True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    sizes = models.CharField(
-        max_length=100,
-        choices=SIZE_CHOICES,
-    )
-    s = models.JSONField(default='{}')
+    # sizes = models.CharField(
+    #     max_length=100,
+    #     choices=SIZE_CHOICES,
+    # )
+    sizes = models.JSONField(default='{}')
 
     def __str__(self):
         return self.name
@@ -45,14 +45,21 @@ class ProductImage(models.Model):
 
     name = models.CharField(max_length=100)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='products/static/images')
     default = models.BooleanField(default=False)
 
-
+from django.contrib.auth.models import User
 class Cart(models.Model):
-    quantity = models.PositiveIntegerField()
-    SIZE = models.CharField(
-        max_length=100,
-        choices=SIZE_CHOICES,
-    )
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+    # product = models.ManyToManyField(Product)
+    # size = models.CharField(max_length=100)
+
+
+class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    size = models.CharField(max_length=100)
+    cart = models.ForeignKey(Cart, on_delete= models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+
+
