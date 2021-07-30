@@ -93,8 +93,30 @@ def add_category_view(response):
     return HttpResponse("error")
 
 
+def add_product_view(response):
+    if response.method == 'POST':
+        product_name = response.POST['product-name']
+        product_price = response.POST['product-price']
+        product_description = response.POST['product-description']
+        product_sizes = response.POST['product-sizes']
+        product_category = response.POST['product-category']
+        product_images = response.POST['product-images']
 
+        category = Category.objects.filter(name= product_category)
+        new_product = Product.objects.create(name= product_name,
+                                              description= product_description,
+                                              category= category[0],
+                                              price= product_price,
+                                              sizes= product_sizes) # need special care
+        new_product.save()
+        i = 0
+        for image in product_images:
+            n = product_name + str(i)
+            new_image = ProductImage.objects.create(name= n, image= image, default=False, product= new_product)
+            new_image.save()
+        return HttpResponse("adding new product done successfully")
 
+    return HttpResponse("Error")
 
 
 class ContactFormView(FormView):
