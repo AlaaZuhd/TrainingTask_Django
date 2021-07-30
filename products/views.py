@@ -79,6 +79,23 @@ def add_to_cart(response):
     return HttpResponse("success")
 
 
+def add_category_view(response):
+    if response.method == 'POST':
+        category_name = response.POST['new-category-item']
+        print(category_name)
+        get_category = Category.objects.filter(name= category_name)
+        print(get_category)
+        if(get_category):
+            return HttpResponse("Error, category is already exist")
+        new_category = Category.objects.create(name= category_name)
+        new_category.save()
+        return HttpResponse("adding new category done sucessfully")
+    return HttpResponse("error")
+
+
+
+
+
 
 class ContactFormView(FormView):
 

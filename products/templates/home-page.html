@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal">Products</h1>
       <p class="fs-5 text-muted">Quickly build an effective product tables for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
     {% for category in categories %}
         <div class="main">
-            <h2>Category: {{ category.name }}</h2>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            <h2 >Category: {{ category.name }}</h2>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center container">
             {% for product in products %}
                 {% if product.category == category %}
                     <div class="col">
@@ -29,26 +31,8 @@
                                     </li>
                                     <li>Description: {{product.description}}</li>
                                 </ul>
-
                             </div>
-                            <style>
-                                .add-to-cart {
-                                    padding: .5rem 1rem;
-                                    margin-bottom: 0;
-                                    background-color: rgba(0,0,0,.03);
-                                    border-top: 1px solid rgba(0,0,0,.125);
-                                    padding-top: 1rem!important;
-                                    padding-bottom: 1rem!important;
-                                }
-                                .add-to-cart input[type=submit] {
-                                    background-color: #251535;
-                                    color: white;
-                                    border: 1px solid white;
-                                }
-                                .add-to-cart input[type=submit]:hover {
-                                    border: 3px solid white;
-                                }
-                            </style>
+
                             <div class="add-to-cart" style="background-color: rgba(0,0,0,.03); margin:0">
                                 <form method="post" action="/products/p"> {% csrf_token %}
                                     {% comment %}{{ add_to_cart_form.as_p }}{% endcomment %}
@@ -69,11 +53,51 @@
                     </div>
                 {% endif %}
             {% endfor %}
+            {% if user.is_superuser %}
+{#                <div class="c" style="display: flex; align-content: center; align-items: center">#}
+{#                    <button id="add-category" >Add new Product to this category +</button>#}
+{#                </div>#}
+                <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            hi
+                                                <button id="add-category" >Add new Product to this category +</button>
+
+                        </div>
+                </div>
+            {% endif %}
             </div>
         </div>
         <hr>
     {% endfor %}
+    {% if  user.is_superuser %}
+        <div class="container ">
+            <button id="add-new-category-btn" style="width: 100%;">Add new Category +</button>
+        </div>
+        <div class="bg-modal" id="bg-modal">
+            <!-- The Modal -->
+            <div id="add-new-category-model" class="modal_">
+              <!-- Modal content -->
+                <span class="close" onclick="closeModal()" style="display: block;">&times;</span>
+                <div class="modal-content_ text-center d-flex align-items-center">
+                    <form method="post" action="/products/addCategory"> {% csrf_token %}
+                        <div class="d-flex flex-column form-container">
+                            <div>
+                                <label for="new-category-item">New Category Name: </label>
+                                <input type="text" id="new-category-item" name="new-category-item">
+                            </div>
+                            <div>
+                                <input type="submit" value="add category">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     {% include 'footer.html' %}
+    <script src="{%  static 'js/script.js' %}"></script>
 {% endblock content %}
 
 
