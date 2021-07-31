@@ -3,12 +3,16 @@
 
 {% block content %}
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Products</h1>
+      <h1 class="display-4 fw-normal" id="products">Products</h1>
       <p class="fs-5 text-muted">Quickly build an effective product tables for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
     {% for category in categories %}
         <div class="main">
-            <h2 >Category: {{ category.name }}</h2>
+            {% if forloop.counter0 == 0 %}
+                <h2 id="category">Category: {{ category.name }}</h2>
+            {% else %}
+                <h2>Category: {{ category.name }}</h2>
+            {% endif %}
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center container">
             {% for product in products %}
                 {% if product.category == category %}
@@ -33,7 +37,7 @@
                             </div>
 
                             <div class="add-to-cart" style="background-color: rgba(0,0,0,.03); margin:0">
-                                <form method="post" action="/products/p"> {% csrf_token %}
+                                <form method="post" action="/products/addToCart"> {% csrf_token %}
                                     {% comment %}{{ add_to_cart_form.as_p }}{% endcomment %}
                                     <label for="quantity">Quantity: </label> <input type="number" id="quantity" name="quantity" step="1" min="0">
                                     <br> <br>
@@ -45,7 +49,7 @@
                                     </select>
                                     <br> <br>
                                     <input type="hidden" name="product_id" value={{ product.id }}>
-                                    <input type="submit" value="Add to cart +" class="w-100 btn btn-lg btn-outline-primary">
+                                    <input type="submit" value="Add to cart +" class="w-100 btn btn-lg btn-outline-primary addBtn">
                                 </form>
                             </div>
                         </div>
@@ -56,29 +60,17 @@
 {#                <div class="c" style="display: flex; align-content: center; align-items: center">#}
 {#                    <button id="add-category" >Add new Product to this category +</button>#}
 {#                </div>#}
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        hi
-                        <button id="add-product{{category}}" onclick="addProduct()">Add new Product to this category +</button>
+{#                <div class="col">#}
+                    <div class="card mb-4 rounded-3 shadow-sm d-flex align-items-center justify-content-center">
+                        <button id="add-product{{category}}" onclick="addProduct()" class="addBtn"> + Add Product </button>
                     </div>
                     <div class="bg-modal" id="bg-modal1">
                         <!-- The modal -->
-                        <style>
-                            #add-new-product-modal {
-                                position: fixed;
-                                background-color: white;
-                                z-index: 2;
-                                top: calc(50% - 250px);
-                                left: calc(50% - 250px);
-                                height: 500px;
-                                width: 500px;
-                            }
-                        </style>
                         <div id="add-new-product-modal" class="modal_">
                             <!-- The modal content -->
                             <span class="close" onclick="closeModal1()" style="display: block;">&times;</span>
                             <div class="modal-content_">
-                                <form method="post" action="/products/addProduct"> {% csrf_token %}
+                                <form method="post" action="/addProduct"> {% csrf_token %}
                                     <div>
                                         <label for="product-name">Product Name</label>
                                         <br>
@@ -104,9 +96,13 @@
                                     </div>
 
                                     <div>
-                                        <label for="product-sizes">Product Szies</label>
+                                        <div>
+                                            <label for="product-sizes">Product Szies</label>
+                                            <br>
+                                            <input type="text" id="product-sizes1" name="product-sizes1" required placeholder="Enter a size">
+                                        </div>
                                         <br>
-                                        <input type="text" id="product-sizes" name="product-sizes" required>
+                                        <button onclick="createNewInput(this)">Add one more size</button>
                                     </div>
 
                                     <div>
@@ -116,21 +112,21 @@
                                     </div>
 
                                     <div>
-                                        <input type="submit" value="Add Product">
+                                        <input type="submit" value="Add Product" class="addBtn">
                                     </div>`
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div>
+{#                </div>#}
             {% endif %}
             </div>
         </div>
         <hr>
     {% endfor %}
     {% if  user.is_superuser %}
-        <div class="container ">
-            <button id="add-new-category-btn" style="width: 100%;">Add new Category +</button>
+        <div class="container text-center">
+            <button id="add-new-category-btn" class="addBtn" style="width: 70%;">Add new Category +</button>
         </div>
         <div class="bg-modal" id="bg-modal">
             <!-- The Modal -->
@@ -145,7 +141,7 @@
                                 <input type="text" id="new-category-item" name="new-category-item">
                             </div>
                             <div>
-                                <input type="submit" value="Add Category">
+                                <input type="submit" value="Add Category" class="addBtn">
                             </div>
                         </div>
 
@@ -157,7 +153,3 @@
     {% include 'footer.html' %}
     <script src="{%  static 'js/script.js' %}"></script>
 {% endblock content %}
-
-
-
-

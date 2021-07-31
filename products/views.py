@@ -32,7 +32,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("products")
+                return redirect("home")
             else:
                 messages.error(request, "inalid username or password")
         else:
@@ -44,7 +44,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
-    return redirect("products")
+    return redirect("home")
 
 def register_view(request):
     if request.method == "POST":
@@ -53,7 +53,7 @@ def register_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("products")
+            return redirect("home")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = UserCreationForm()
     return render(request=request, template_name="register.html", context={"register_form": form})
@@ -76,7 +76,7 @@ def add_to_cart(response):
                                             cart= cart_,
                                             quantity= quantity)
         cart_item.save()
-    return HttpResponse("success")
+    return redirect("home")
 
 
 def add_category_view(response):
@@ -89,7 +89,8 @@ def add_category_view(response):
             return HttpResponse("Error, category is already exist")
         new_category = Category.objects.create(name= category_name)
         new_category.save()
-        return HttpResponse("adding new category done sucessfully")
+        print("yes")
+        return redirect("home")
     return HttpResponse("error")
 
 

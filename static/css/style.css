@@ -89,6 +89,7 @@ body {
     height: 90%;
     border: 2px solid red;
     margin: auto;
+    overflow: scroll;
 
 }
 
@@ -100,3 +101,19 @@ body {
     padding: 10px;
 }
 
+.addBtn {
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-top: 1px solid rgba(0,0,0,.125);
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+}
+.addBtn {
+    background-color: #251535;
+    color: white;
+    border: 1px solid white;
+}
+.addBtn:hover {
+    border: 3px solid white;
+}
