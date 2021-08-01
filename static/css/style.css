@@ -75,7 +75,7 @@ body {
 }
 
 #add-new-product-modal {
-        position: fixed;
+    position: fixed;
     background-color: white;
     z-index: 2;
     top: calc(50% - 250px);
@@ -87,7 +87,7 @@ body {
 .modal-content_ {
     width: 90%;
     height: 90%;
-    border: 2px solid red;
+    border: 2px solid #251535;
     margin: auto;
     overflow: scroll;
 

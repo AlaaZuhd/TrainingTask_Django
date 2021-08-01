@@ -9,9 +9,9 @@
     {% for category in categories %}
         <div class="main">
             {% if forloop.counter0 == 0 %}
-                <h2 id="category">Category: {{ category.name }}</h2>
+                <h2 id="category" style="padding: 20px">Category: {{ category.name }}</h2>
             {% else %}
-                <h2>Category: {{ category.name }}</h2>
+                <h2 style="padding: 20px">Category: {{ category.name }}</h2>
             {% endif %}
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center container">
             {% for product in products %}
@@ -35,11 +35,12 @@
                                     <li>Description: {{product.description}}</li>
                                 </ul>
                             </div>
-
+                            {% if user.is_authenticated %}
                             <div class="add-to-cart" style="background-color: rgba(0,0,0,.03); margin:0">
                                 <form method="post" action="/products/addToCart"> {% csrf_token %}
                                     {% comment %}{{ add_to_cart_form.as_p }}{% endcomment %}
-                                    <label for="quantity">Quantity: </label> <input type="number" id="quantity" name="quantity" step="1" min="0">
+                                    <label for="quantity">Quantity: </label>
+                                    <input type="number" id="quantity" name="quantity" step="1" min="0" required>
                                     <br> <br>
                                     Size:
                                     <select id="size" name="size" value="Size">
@@ -52,6 +53,12 @@
                                     <input type="submit" value="Add to cart +" class="w-100 btn btn-lg btn-outline-primary addBtn">
                                 </form>
                             </div>
+                            {% else %}
+                                <div class="add-to-cart" style="background-color: rgba(0,0,0,.03); margin:0">
+                                    <p>Please login to add this product into your cart</p>
+                                    <a class="me-3 py-2 text-decoration-none" style="background-color: #251535; color: white; padding: 3px" href="/login">Log in</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 {% endif %}
@@ -70,23 +77,23 @@
                             <!-- The modal content -->
                             <span class="close" onclick="closeModal1()" style="display: block;">&times;</span>
                             <div class="modal-content_">
-                                <form method="post" action="/addProduct"> {% csrf_token %}
+                                <form method="post" action="/products/addProduct"> {% csrf_token %}
                                     <div>
                                         <label for="product-name">Product Name</label>
                                         <br>
-                                        <input type="text" id="product-name" name="product-name" required>
+                                        <input type="text" id="product-name" name="product-name" required placeholder="Enter the new Product name">
                                     </div>
 
                                     <div>
                                         <label for="product-price">Product Price</label>
                                         <br>
-                                        <input type="number" id="product-price" name="product-price" min="0" required>
+                                        <input type="number" id="product-price" name="product-price" min="0" required placeholder="Enter the price of the new product">
                                     </div>
 
                                     <div>
                                         <label for="product-description">Product Description</label>
                                         <br>
-                                        <input type="text" id="product-description" name="product-description">
+                                        <input type="text" id="product-description" name="product-description" placeholder="Enter a description for the new product">
                                     </div>
 
                                     <div>
@@ -97,11 +104,12 @@
 
                                     <div>
                                         <div>
-                                            <label for="product-sizes">Product Szies</label>
+                                            <label for="product-sizes">Product Sizes</label>
                                             <br>
                                             <input type="text" id="product-sizes1" name="product-sizes1" required placeholder="Enter a size">
                                         </div>
                                         <br>
+                                        <input id="number-of-sizes" name="number-of-sizes" type="number" hidden value="1">
                                         <button onclick="createNewInput(this)">Add one more size</button>
                                     </div>
 
@@ -133,7 +141,7 @@
             <div id="add-new-category-model" class="modal_">
               <!-- Modal content -->
                 <span class="close" onclick="closeModal()" style="display: block;">&times;</span>
-                <div class="modal-content_ text-center d-flex align-items-center">
+                <div class="modal-content_ text-center d-flex align-items-center justify-content-center">
                     <form method="post" action="/products/addCategory"> {% csrf_token %}
                         <div class="d-flex flex-column form-container">
                             <div>
@@ -150,6 +158,6 @@
             </div>
         </div>
     {% endif %}
-    {% include 'footer.html' %}
-    <script src="{%  static 'js/script.js' %}"></script>
+{#    {% include 'footer.html' %}#}
+{#    <script src="{%  static 'js/script.js' %}"></script>#}
 {% endblock content %}
