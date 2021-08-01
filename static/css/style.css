@@ -117,3 +117,7 @@ body {
 .addBtn:hover {
     border: 3px solid white;
 }
+
+input[type=reset] {
+
+}
