@@ -33,7 +33,7 @@ function closeModal() {
 function createNewInput(addAnotherSizeBtn) {
     numberOfSizes ++
     numberOfSizesInput.value = numberOfSizes
-    let newContent = `<br><input type="text" id="product-sizes${numberOfSizes}" name="product-sizes${numberOfSizes}" required placeholder="Enter a size">`
+    let newContent = `<br><input type="text" id="product-sizes${numberOfSizes}" name="product-sizes${numberOfSizes}" required placeholder="Enter a size" style="margin-bottom: 5px">`
     let container = addAnotherSizeBtn.parentNode.firstElementChild
     let tempInputs = []
     elements_ = container.getElementsByTagName("*")

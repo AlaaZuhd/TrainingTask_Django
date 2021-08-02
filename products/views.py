@@ -64,18 +64,18 @@ def add_to_cart(response):
     if response.method == 'POST':
         print(response.POST)
         quantity = response.POST['quantity']
-        product = Product.objects.get(id= response.POST['product_id'])
+        product = Product.objects.get(id=response.POST['product_id'])
         try:
             cart = Cart.objects.get(id=response.user.id)
             cart_ = cart
         except Cart.DoesNotExist:
-            cart = Cart.objects.create(user= response.user)
+            cart = Cart.objects.create(user=response.user)
             cart_ = cart
         print(cart_)
-        cart_item = CartItem.objects.create(size= response.POST['size'],
-                                            product= product,
-                                            cart= cart_,
-                                            quantity= quantity)
+        cart_item = CartItem.objects.create(size=response.POST['size'],
+                                            product=product,
+                                            cart=cart_,
+                                            quantity=quantity)
         cart_item.save()
     return redirect("home")
 
@@ -84,11 +84,11 @@ def add_category_view(response):
     if response.method == 'POST':
         category_name = response.POST['new-category-item']
         print(category_name)
-        get_category = Category.objects.filter(name= category_name)
+        get_category = Category.objects.filter(name=category_name)
         print(get_category)
-        if(get_category):
+        if get_category:
             return HttpResponse("Error, category is already exist")
-        new_category = Category.objects.create(name= category_name)
+        new_category = Category.objects.create(name=category_name)
         new_category.save()
         print("yes")
         return redirect("home")

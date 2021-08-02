@@ -10,32 +10,33 @@ body {
 /*{#    max-width: 700px;#}*/
 /*{#}#}*/
 
-.add-to-cart {
+.add-to-cart, .add-new-size, #add-new-category-btn, .addBtn  {
     padding: .5rem 1rem;
     margin-bottom: 0;
     background-color: rgba(0,0,0,.03);
     border-top: 1px solid rgba(0,0,0,.125);
     padding-top: 1rem!important;
     padding-bottom: 1rem!important;
+    border-radius: 5px;
 }
-.add-to-cart input[type=submit] {
+.add-to-cart input[type=submit], .add-new-size, #add-new-category-btn, .addBtn  {
     background-color: #251535;
     color: white;
     border: 1px solid white;
 }
-.add-to-cart input[type=submit]:hover {
+.add-to-cart input[type=submit]:hover, .add-new-size:hover, #add-new-category-btn:hover, .addBtn:hover {
     border: 3px solid white;
 }
 
-#add-new-category-btn {
-    background-color: #251535;
-    color: white;
-    border: 1px solid white;
-    padding: 10px;
-}
-#add-new-category-btn:hover {
-    border: 3px solid white;
-}
+/*#add-new-category-btn {*/
+/*    background-color: #251535;*/
+/*    color: white;*/
+/*    border: 1px solid white;*/
+/*    padding: 10px;*/
+/*}*/
+/*#add-new-category-btn:hover {*/
+/*    border: 3px solid white;*/
+/*}*/
 
 /*.bg-modal {*/
 /*    width: 500px;*/
@@ -101,22 +102,22 @@ body {
     padding: 10px;
 }
 
-.addBtn {
-    padding: .5rem 1rem;
-    margin-bottom: 0;
-    background-color: rgba(0,0,0,.03);
-    border-top: 1px solid rgba(0,0,0,.125);
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
-}
-.addBtn {
-    background-color: #251535;
-    color: white;
-    border: 1px solid white;
-}
-.addBtn:hover {
-    border: 3px solid white;
-}
+/*.addBtn {*/
+/*    padding: .5rem 1rem;*/
+/*    margin-bottom: 0;*/
+/*    background-color: rgba(0,0,0,.03);*/
+/*    border-top: 1px solid rgba(0,0,0,.125);*/
+/*    padding-top: 1rem!important;*/
+/*    padding-bottom: 1rem!important;*/
+/*}*/
+/*.addBtn {*/
+/*    background-color: #251535;*/
+/*    color: white;*/
+/*    border: 1px solid white;*/
+/*}*/
+/*.addBtn:hover {*/
+/*    border: 3px solid white;*/
+/*}*/
 
 input[type=reset] {
 
