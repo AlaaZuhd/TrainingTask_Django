@@ -10,7 +10,7 @@ body {
 /*{#    max-width: 700px;#}*/
 /*{#}#}*/
 
-.add-to-cart, .add-new-size, #add-new-category-btn, .addBtn, .next-btn, .nn  {
+.add-to-cart, .add-new-size, #add-new-category-btn, .addBtn {
     padding: .5rem 1rem;
     margin-bottom: 0;
     background-color: rgba(0,0,0,.03);
@@ -19,14 +19,44 @@ body {
     padding-bottom: 1rem!important;
     border-radius: 5px;
 }
-.add-to-cart input[type=submit], .add-new-size, #add-new-category-btn, .addBtn, .next-btn, .nn  {
+.add-to-cart input[type=submit], .add-new-size, #add-new-category-btn, .addBtn   {
     background-color: #251535;
     color: white;
     border: 1px solid white;
 }
-.add-to-cart input[type=submit]:hover, .add-new-size:hover, #add-new-category-btn:hover, .addBtn:hover, .next-btn:hover, .nn {
+.add-to-cart input[type=submit]:hover, .add-new-size:hover, #add-new-category-btn:hover, .addBtn:hover {
     border: 3px solid white;
 }
+
+/*.prev-next-btn-container {*/
+/*    display: felx;*/
+/*}*/
+
+.prev-next-btn-container {
+    justify-content: space-around;
+}
+
+
+.next-btn {
+    background-image: url("../images/right-arrow.png");
+}
+
+.prev-btn {
+    background-image: url("../images/left-arrow.png");
+}
+
+.next-btn, .prev-btn {
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: auto 30px;
+    border: 1px solid #251535;
+    background-position: center;
+
+}
+
+
 
 /*#add-new-category-btn {*/
 /*    background-color: #251535;*/

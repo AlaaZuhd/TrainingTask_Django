@@ -44,17 +44,10 @@
                                     {% endfor %}
 {#                                    <input type="number" value="{{ product.productimage_set.all|length }}">#}
                                     <br>
-                                <style>
-                                    .next-btn  {
-                                        background-color: #251535;
-                                        color: white;
-                                        border: 1px solid white;
-                                    }
-                                    .next-btn:hover {
-                                        border: 3px solid white;
-                                    }
-                                </style>
-                                    <button class="next-btn w-100 btn btn-lg btn-outline-primary" onclick="nextImage(this)" value="{{ product.productimage_set.all|length  }}">Next Photo</button>
+                                    <div class="prev-next-btn-container text-center d-flex align-items-center ">
+                                        <button class="prev-btn" onclick="nextImage(this)" value="{{ product.productimage_set.all|length  }}"></button>
+                                        <button class="next-btn" onclick="prevImage(this)" value="{{ product.productimage_set.all|length  }}"></button>
+                                    </div>
                                 </p>
                                 <ul class="list-unstyled mt-3 mb-4" >
                                     <li>Price: {{product.price}} $</li>
