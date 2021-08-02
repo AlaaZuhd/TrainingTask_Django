@@ -46,3 +46,28 @@ function createNewInput(addAnotherSizeBtn) {
     for (let i=2, j=0; i<=2*numberOfSizes-1; i+=2, j++)
         elements_[i].value = tempInputs[j]
 }
+
+function nextImage(item){
+    let number_of_images = item.value
+    let images_url_list = []
+    let images_list = item.parentNode.getElementsByTagName('input')
+    let currentImage = item.parentNode.getElementsByTagName('img')
+    let imageNumberMessage = item.parentNode.getElementsByTagName('span')[0]
+    let currentImageNumber = images_list[0].value
+    for (let i=1; i<=number_of_images; i++){
+        images_url_list.push(images_list[i].value)
+        console.log(images_url_list[i-1])
+    }
+    console.log(number_of_images)
+    console.log(currentImageNumber)
+    if(number_of_images > 0){
+        if(parseInt(currentImageNumber) === parseInt(number_of_images)) { // display the first image
+            currentImage[0].src = images_url_list[0]
+            images_list[0].value = 1
+        }else {
+                currentImage[0].src = images_url_list[parseInt(currentImageNumber)]
+                images_list[0].value = parseInt(currentImageNumber) + 1
+        }
+    }
+    imageNumberMessage.textContent = "Image " + (images_list[0].value).toString() + " of " + (number_of_images).toString()
+}

@@ -22,8 +22,39 @@
                                 <h4 class="my-0 fw-normal">{{ product.name }}</h4>
                             </div>
                             <div class="card-body">
-                                <p>
-                                    <img src="{{ product.productimage_set.first.image.url }}" width="150px" height="150px">
+                                <p style="position: relative; text-align: center">
+                                    <img src="{{ product.productimage_set.first.image.url }}" width="150px" height="150px" vaue="1">
+{#                                    <style>#}
+{#                                        span {#}
+{#                                            position: absolute;#}
+{#                                            top: 50%;#}
+{#                                            left: 50%;#}
+{#                                            transform: translate(-50%, -50%);#}
+{#                                        }#}
+{#                                    </style>#}
+                                    <br>
+                                    {% if product.productimage_set.all|length > 0 %}
+                                        <span>Image 1 of {{ product.productimage_set.all|length }}</span>
+                                    {% else %}
+                                        <span>Image 0 of 0 </span>
+                                    {% endif %}
+                                    <input type="number" hidden value="1">
+                                    {% for image in product.productimage_set.all %}
+                                        <input hidden value="{{ image.image.url }}"></input>
+                                    {% endfor %}
+{#                                    <input type="number" value="{{ product.productimage_set.all|length }}">#}
+                                    <br>
+                                <style>
+                                    .next-btn  {
+                                        background-color: #251535;
+                                        color: white;
+                                        border: 1px solid white;
+                                    }
+                                    .next-btn:hover {
+                                        border: 3px solid white;
+                                    }
+                                </style>
+                                    <button class="next-btn w-100 btn btn-lg btn-outline-primary" onclick="nextImage(this)" value="{{ product.productimage_set.all|length  }}">Next Photo</button>
                                 </p>
                                 <ul class="list-unstyled mt-3 mb-4" >
                                     <li>Price: {{product.price}} $</li>
@@ -154,7 +185,6 @@
                                 <input type="submit" value="Add Category" class="addBtn">
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

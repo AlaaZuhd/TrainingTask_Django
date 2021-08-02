@@ -60,6 +60,34 @@ def register_view(request):
     return render(request=request, template_name="register.html", context={"register_form": form})
 
 
+def my_cart_view(request):
+    context = {
+        'cart': Cart.objects.prefetch_related("cartitem_set").get(user=request.user),
+        # 'cart': Cart.objects.get(user= request.user),
+        # 'cartitems': CartItem.objects.filter(cart= Cart.objects.prefetch_related("cartitem_set").get(user=request.user))
+    }
+    if request.method == "POST":
+        cart_item_id = request.POST['cart_item_id']
+        cart_item = CartItem.objects.get(id=cart_item_id)
+        action = request.POST['cart_item_action']
+        if action == "update_cart_item":
+            size = request.POST['cart_item_size']
+            quantity = request.POST['cart_item_quantity']
+            cart_item.size = size
+            cart_item.quantity = quantity
+            cart_item.save()
+            messages.info(request, f"Cart item have been updated successfully .")
+            return redirect("my_cart")
+        else:
+            cart_item.delete()
+            messages.info(request, f"Cart item have been removed successfully.")
+            return redirect("my_cart")
+    print(str(context['cart'].cartitem_set.first))
+    # for c in context['cart'].cartitem_set.all():
+    #     print(c)
+    return render(request=request, template_name="my_cart.html", context= context)
+
+
 def add_to_cart(response):
     if response.method == 'POST':
         print(response.POST)

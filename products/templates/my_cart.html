@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container py-5 ">
+        <div class="main container">
+            <h2 id="category" style="padding: 20px">My Cart</h2>
+            <p>Hi {{ user }}, Here are your cards' items</p>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center container">
+                {% for cartItem in cart.cartitem_set.all %}
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <h4 class="my-0 fw-normal">Cart Item NO.{{ forloop.counter }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="post"> {% csrf_token %}
+                                    {% comment %}{{ add_to_cart_form.as_p }}{% endcomment %}
+                                    <div>
+                                        <label for="cart_item{{ forloop.counter }}_Category">Product Category: </label>
+                                        <input type="text" id="cart_item{{ forloop.counter }}_Category" name="cart_item_category" value="{{ cartItem.product.category.name }}" disabled>
+                                    </div>
+
+                                    <div>
+                                        <label for="cart_item{{ forloop.counter }}_product">Product Name: </label>
+                                        <input type="text" id="cart_item{{ forloop.counter }}_product" name="cart_item_product" value="{{ cartItem.product.name }}" disabled>
+                                    </div>
+
+                                    <div>
+                                        <label for="cart_item{{ forloop.counter }}_price_per_product">Price/Product: </label>
+                                        <input type="number" id="cart_item{{ forloop.counter }}_price_per_product" name="cart_item_price_per_product" vlaue="{{ cartItem.product.price }}" disabled>
+                                    </div>
+
+                                    <div>
+                                        <label for="cart_item{{ forloop.counter }}_size">Product Size: </label>
+            {#                                    <input type="text" id="cart_item{{ forloop.counter }}_size" name="cart_item_size" value="{{ cartItem.size }}">#}
+                                        <select id="cart_item{{ forloop.counter }}_size" name="cart_item_size" value="{{ cartItem.size }}" required>
+                                            {% for size in cartItem.product.sizes %}
+                                                <option value="{{ size }}"> {{ size }} </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="cart_item{{ forloop.counter }}_quantity">Product Quantity: </label>
+                                        <input type="number" id="cart_item{{ forloop.counter }}_quantity" name="cart_item_quantity" value="{{ cartItem.quantity }}" required min="0">
+                                    </div>
+
+                                    <div>
+                                        <label for="cart_item{{ forloop.counter }}_action">Action: </label>
+                                        <select id="cart_item{{ forloop.counter }}_action" name="cart_item_action" value="action" required>
+                                            <option value="update_cart_item"> Update Cart Item </option>
+                                            <option value="delete_cart_item"> Delete Cart Item </option>
+                                        </select>
+                                    </div>
+                                    <input type="text" hidden name="cart_item_id" value="{{ cartItem.id }}">
+                                    <input type="submit" value="Submit" class="w-100 btn btn-lg btn-outline-primary addBtn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
