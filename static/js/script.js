@@ -85,10 +85,10 @@ function prevImage(item) {
     for (let i=1; i<=number_of_images; i++){
         images_url_list.push(images_list[i].value)
     }
-    if(number_of_images > 0){
+    if(number_of_images !== 0){
         if(parseInt(currentImageNumber) === 1) { // display the first image
             currentImage[0].src = images_url_list[parseInt(number_of_images) -1]
-            images_list[0].value = parseInt(number_of_images) -1
+            images_list[0].value = parseInt(number_of_images)
         }else {
                 currentImage[0].src = images_url_list[parseInt(currentImageNumber)-2]
                 images_list[0].value = parseInt(currentImageNumber) - 1
