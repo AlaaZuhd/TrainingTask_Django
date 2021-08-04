@@ -1,7 +1,0 @@
-127.0.0.1 - - [03/Aug/2021:16:34:56 +0300] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
-127.0.0.1 - - [03/Aug/2021:16:35:12 +0300] "GET / HTTP/1.1" 502 157 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
-127.0.0.1 - - [03/Aug/2021:16:35:12 +0300] "GET /favicon.ico HTTP/1.1" 502 157 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
-127.0.0.1 - - [03/Aug/2021:16:36:08 +0300] "GET /ECW HTTP/1.1" 502 157 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
-127.0.0.1 - - [03/Aug/2021:16:36:28 +0300] "GET /ECW HTTP/1.1" 404 153 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
-127.0.0.1 - - [03/Aug/2021:16:36:28 +0300] "GET /favicon.ico HTTP/1.1" 404 153 "http://localhost:10/ECW" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
-127.0.0.1 - - [03/Aug/2021:16:36:57 +0300] "GET /ECW HTTP/1.1" 404 153 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
