@@ -1,0 +1,20 @@
+server {
+    listen localhost:8000;
+
+    location / {
+        proxy_pass http://127.0.0.1:8001;
+    }
+
+    location /static/ {
+
+        alias C:/Users/AlaaZ/Desktop/Training/TrainingTask_Django/media;
+    }
+
+
+    location /media/ {
+
+       alias C:/Users/AlaaZ/Desktop/Training/TrainingTask_Django/media;
+
+    }
+
+}
